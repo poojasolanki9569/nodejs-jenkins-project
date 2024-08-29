@@ -6,10 +6,10 @@ module.exports = {
       es2021: true, // Enable ES2021 syntax
     },
   },
-  extends: [
-    "eslint:recommended", // Use recommended ESLint rules
-    "plugin:react/recommended", // Use recommended rules for React
-  ],
+  //   extends: [
+  //     "eslint:recommended", // Use recommended ESLint rules
+  //     "plugin:react/recommended", // Use recommended rules for React
+  //   ],
   parserOptions: {
     ecmaVersion: 12, // Use ECMAScript 2021 syntax
     sourceType: "module", // Enable ECMAScript modules
