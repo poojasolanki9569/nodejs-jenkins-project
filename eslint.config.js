@@ -1,9 +1,8 @@
-const { defineConfig } = require("eslint");
-
-module.exports = defineConfig({
+// eslint.config.js
+module.exports = {
   languageOptions: {
     globals: {
-      browser: true, // Define global variables for browser environment
+      browser: true, // Define global variables for the browser environment
       es2021: true, // Enable ES2021 syntax
     },
   },
@@ -27,4 +26,4 @@ module.exports = defineConfig({
       version: "detect", // Automatically detect the version of React
     },
   },
-});
+};
