@@ -82,13 +82,13 @@ pipeline {
     post {
         always {
             // Archive ESLint and Jest reports
-            archiveArtifacts artifacts: 'eslint-report.json', allowEmptyArchive: true
+            archiveArtifacts artifacts: './eslint-report.json', allowEmptyArchive: true
 
             
             // Record issues using Warnings Next Generation Plugin
             recordIssues(
                 enabledForFailure: true, aggregatingResults: true,
-                tools: [eslint(pattern: 'eslint-report.json')]
+                tools: [eslint(pattern: './eslint-report.json')]
             )
         }
     }
