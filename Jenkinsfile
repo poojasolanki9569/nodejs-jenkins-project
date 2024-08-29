@@ -44,15 +44,30 @@ pipeline {
         //         recordIssues tools: [eslint()] // Example for ESLint
         //     }
         // }
-        stage('Lint') {
+        // stage('Lint') {
+        //     steps {
+        //         sh 'npm install eslint --save-dev'
+        //         sh './node_modules/.bin/eslint index.js --format json -o eslint-report.json'
+        //     }
+        // }
+
+        // stage('Record Issues') {
+        //     steps {
+        //         recordIssues tools: [eslint(pattern: 'eslint-report.json')]
+        //     }
+        // }
+
+         stage('Lint Code') {
             steps {
-                sh 'npm install eslint --save-dev'
-                sh './node_modules/.bin/eslint index.js --format json -o eslint-report.json'
+                script {
+                    // Run ESLint on all JavaScript files in the src directory
+                    sh 'npx eslint index.js --format json -o eslint-report.json'
+                }
             }
         }
-
         stage('Record Issues') {
             steps {
+                // Record ESLint issues found during the linting stage
                 recordIssues tools: [eslint(pattern: 'eslint-report.json')]
             }
         }
