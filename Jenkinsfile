@@ -65,25 +65,31 @@ pipeline {
                 }
             }
         }
-        stage('Record Issues') {
-            steps {
-                script {
-                    // Record ESLint issues found during linting
-                    if (fileExists('eslint-report.json')) {
-                        recordIssues(
-                            tools: [eslint(pattern: 'eslint-report.json')]
-                        )
-                    }
-                }
-            }
-        }
+        // stage('Record Issues') {
+        //     steps {
+        //         script {
+        //             // Record ESLint issues found during linting
+        //             if (fileExists('eslint-report.json')) {
+        //                 recordIssues(
+        //                     tools: [eslint(pattern: 'eslint-report.json')]
+        //                 )
+        //             }
+        //         }
+        //     }
+        // }
         
     }
-    
     post {
         always {
-            // Archive the ESLint report for reference
+            // Archive ESLint and Jest reports
             archiveArtifacts artifacts: 'eslint-report.json', allowEmptyArchive: true
+
+            
+            // Record issues using Warnings Next Generation Plugin
+            recordIssues(
+                enabledForFailure: true, aggregatingResults: true,
+                tools: [eslint(pattern: 'eslint-report.json')]
+            )
         }
     }
 }
