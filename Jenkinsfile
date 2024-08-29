@@ -27,21 +27,33 @@ pipeline {
         //     }
         // }
 
-        stage('Build') {
+        // stage('Build') {
+        //     steps {
+        //         // Build the Node.js application
+        //         sh 'npm run build'
+        //     }
+        // }
+        // stage('Run Linter') {
+        //     steps {
+        //         sh 'npm run lint' // Example linter command
+        //     }
+        // }
+
+        // stage('Record Issues') {
+        //     steps {
+        //         recordIssues tools: [eslint()] // Example for ESLint
+        //     }
+        // }
+        stage('Lint') {
             steps {
-                // Build the Node.js application
-                sh 'npm run build'
-            }
-        }
-        stage('Run Linter') {
-            steps {
-                sh 'npm run lint' // Example linter command
+                sh 'npm install eslint --save-dev'
+                sh './node_modules/.bin/eslint your-file.js --format json -o eslint-report.json'
             }
         }
 
         stage('Record Issues') {
             steps {
-                recordIssues tools: [eslint()] // Example for ESLint
+                recordIssues tools: [eslint(pattern: 'eslint-report.json')]
             }
         }
     }
