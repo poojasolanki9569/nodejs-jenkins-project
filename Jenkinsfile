@@ -85,15 +85,13 @@ pipeline {
     tools {
         nodejs 'NodeJS 18.x' // Replace with your Node.js installation name in Jenkins
     }
-    
+
     stages {
         stage('Checkout') {
             steps {
                 // Checkout the source code from the Git repository
                 git branch: 'master', url: 'https://github.com/poojasolanki9569/nodejs-jenkins-project.git'
             }
-        }
-    stages {
         stage('Install Dependencies') {
             steps {
                 script {
