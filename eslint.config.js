@@ -1,7 +1,11 @@
-module.exports = {
-  env: {
-    browser: true, // Set the environment to browser
-    es2021: true, // Enable ES2021 syntax
+const { defineConfig } = require("eslint");
+
+module.exports = defineConfig({
+  languageOptions: {
+    globals: {
+      browser: true, // Define global variables for browser environment
+      es2021: true, // Enable ES2021 syntax
+    },
   },
   extends: [
     "eslint:recommended", // Use recommended ESLint rules
@@ -12,7 +16,6 @@ module.exports = {
     sourceType: "module", // Enable ECMAScript modules
   },
   rules: {
-    // Custom rules
     "no-console": "warn", // Warn when console statements are used
     "no-unused-vars": ["error", { argsIgnorePattern: "^_" }], // Error for unused variables, but ignore variables starting with '_'
     semi: ["error", "always"], // Enforce the use of semicolons
@@ -24,4 +27,4 @@ module.exports = {
       version: "detect", // Automatically detect the version of React
     },
   },
-};
+});
