@@ -33,5 +33,16 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage('Run Linter') {
+            steps {
+                sh 'npm run lint' // Example linter command
+            }
+        }
+
+        stage('Record Issues') {
+            steps {
+                recordIssues tools: [eslint()] // Example for ESLint
+            }
+        }
     }
 }
