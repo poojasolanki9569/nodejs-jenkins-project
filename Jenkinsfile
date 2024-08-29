@@ -1,39 +1,37 @@
 pipeline {
     agent any
+
     tools {
-        nodejs 'NodeJS 18.x' // Replace with your Node.js installation name
+        nodejs 'NodeJS 18.x' // Replace with your Node.js installation name in Jenkins
     }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/username/repo.git'
+                // Checkout the source code from the Git repository
+                git branch: 'master', url: 'https://github.com/poojasolanki9569/nodejs-jenkins-project.git'
             }
         }
+
         stage('Install Dependencies') {
             steps {
+                // Install Node.js dependencies
                 sh 'npm install'
             }
         }
+
         stage('Run Tests') {
             steps {
+                // Run tests
                 sh 'npm test'
             }
         }
+
         stage('Build') {
             steps {
+                // Build the Node.js application
                 sh 'npm run build'
             }
-        }
-        stage('Deploy') {
-            steps {
-                // Add deployment steps here
-                sh 'echo "Deploying application..."'
-            }
-        }
-    }
-    post {
-        always {
-            junit '**/test-results/*.xml' // Adjust path to test results if needed
         }
     }
 }
