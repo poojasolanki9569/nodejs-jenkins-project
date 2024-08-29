@@ -47,7 +47,7 @@ pipeline {
         stage('Lint') {
             steps {
                 sh 'npm install eslint --save-dev'
-                sh './node_modules/.bin/eslint your-file.js --format json -o eslint-report.json'
+                sh './node_modules/.bin/eslint index.js --format json -o eslint-report.json'
             }
         }
 
@@ -56,5 +56,6 @@ pipeline {
                 recordIssues tools: [eslint(pattern: 'eslint-report.json')]
             }
         }
+        
     }
 }
