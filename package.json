@@ -11,9 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "non-existent-package": "latest"
-  },
   "devDependencies": {
     "eslint": "^9.9.1",
     "mocha": "^10.7.3"

@@ -27,44 +27,21 @@ pipeline {
         //     }
         // }
 
-        // stage('Build') {
+        // stage('Lint Code') {
         //     steps {
-        //         // Build the Node.js application
-        //         sh 'npm run build'
+        //         script {
+        //             // Run ESLint and output results to a JSON file
+        //             sh 'npx eslint index.js --format json -o eslint-report.json'
+        //         }
         //     }
         // }
-        // stage('Run Linter') {
-        //     steps {
-        //         sh 'npm run lint' // Example linter command
-        //     }
-        // }
-
-        // stage('Record Issues') {
-        //     steps {
-        //         recordIssues tools: [eslint()] // Example for ESLint
-        //     }
-        // }
-        // stage('Lint') {
-        //     steps {
-        //         sh 'npm install eslint --save-dev'
-        //         sh './node_modules/.bin/eslint index.js --format json -o eslint-report.json'
-        //     }
-        // }
-
-        // stage('Record Issues') {
-        //     steps {
-        //         recordIssues tools: [eslint(pattern: 'eslint-report.json')]
-        //     }
-        // }
-
-         stage('Lint Code') {
+        stage('Build') {
             steps {
-                script {
-                    // Run ESLint and output results to a JSON file
-                    sh 'npx eslint index.js --format json -o eslint-report.json'
-                }
+                // Build the Node.js application
+                sh 'npm run build'
             }
         }
+
         // stage('Record Issues') {
         //     steps {
         //         script {
@@ -80,17 +57,17 @@ pipeline {
         
     }
     post {
-        always {
-            // Archive ESLint and Jest reports
-            // archiveArtifacts artifacts: './eslint-report.json', allowEmptyArchive: true
+        // always {
+        //     // Archive ESLint and Jest reports
+        //     archiveArtifacts artifacts: './eslint-report.json', allowEmptyArchive: true
 
             
-            // Record issues using Warnings Next Generation Plugin
-            recordIssues(
-                enabledForFailure: true, aggregatingResults: true,
-                tools: [eslint(pattern: './eslint-report.json')]
-            )
-        }
+        //     // Record issues using Warnings Next Generation Plugin
+        //     recordIssues(
+        //         enabledForFailure: true, aggregatingResults: true,
+        //         tools: [eslint(pattern: './eslint-report.json')]
+        //     )
+        // }
     }
 }
 
